@@ -7,12 +7,12 @@
 @section('content')
 <div class="row">
 
-  @if (session('status'))
+  @if (session('error'))
   <div class="col-md-12">
     <div class="alert alert-danger alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
           aria-hidden="true">×</span></button>
-      <strong>{{ session('status') }}</strong>
+      <strong>{{ session('error') }}</strong>
     </div>
   </div>
   @endif

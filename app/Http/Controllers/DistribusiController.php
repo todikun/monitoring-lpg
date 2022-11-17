@@ -156,7 +156,7 @@ class DistribusiController extends Controller
 
     public function jadwalPengiriman()
     {
-        $distribusi = LpgDistribusi::where('status', 'Disetujui')->orderBy('created_at', 'desc')->get();
+        $distribusi = LpgDistribusi::where('status', 'Disetujui')->get();
         return view('pages.distribusi.jadwal', compact('distribusi'));
     }
 
@@ -166,5 +166,27 @@ class DistribusiController extends Controller
         $items = ItemDistribusi::where('distribusi_id', $id)->get();
 
         return view('pages.dokumen.surat', compact('distribusi', 'items'));
+    }
+
+    public function laporan()
+    {
+        $distribusi = LpgDistribusi::where('status', '<>', 'none')->get();
+        return view('pages.dokumen.laporan', compact('distribusi'));
+    }
+
+    public function laporanAction(Request $request)
+    {
+        $distribusi = LpgDistribusi::where('status', 'Disetujui')
+            ->whereMonth('tanggal', '=', Carbon::parse($request->tanggal)->format('m'))
+            ->whereYear('tanggal', '=', Carbon::parse($request->tanggal)->format('Y'))->get()->count();
+
+        if ($distribusi < 1) {
+            return back()->with('status', 'Data periode ' . Carbon::parse($request->tanggal)->format('F Y') . ' belum ada!');
+        }
+
+        return view('pages.dokumen.laporan-cetak', [
+            'distribusi' => $distribusi,
+            'periode' => $request->tanggal
+        ]);
     }
 }

@@ -41,6 +41,8 @@
                                     <th>#</th>
                                     <th>Kode</th>
                                     <th>Tanggal</th>
+                                    <th>Tujuan</th>
+                                    <th>Qty</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                     <th>Keterangan</th>
@@ -52,7 +54,9 @@
                                     @forelse ($distribusi as $data )
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->kode_trx }}</td>
-                                    <td>{{ $data->created_at->format('d M Y') }}</td>
+                                    <td>{{ Carbon\Carbon::parse($data->tanggal)->format('d M Y') }}</td>
+                                    <td>{{ $data->item->count()}}</td>
+                                    <td>{{ $data->item->sum('qty')}}</td>
                                     <td>
                                         @switch($data->status)
                                         @case('Disetujui')

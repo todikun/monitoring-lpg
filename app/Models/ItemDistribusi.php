@@ -15,4 +15,9 @@ class ItemDistribusi extends Model
     {
         return $this->belongsTo(Pangkalan::class);
     }
+
+    public function distribusi()
+    {
+        return $this->belongsTo(LpgDistribusi::class, 'distribusi_id', 'id');
+    }
 }

@@ -73,6 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('distrusi/pengajuan/accepted/{id}', [DistribusiController::class, 'setujuiTransaksi'])->name('manajer.accepted');
         Route::get('distrusi/pengajuan/denied/{id}', [DistribusiController::class, 'formTolakTransaksi'])->name('manajer.denied');
         Route::patch('distrusi/pengajuan/denied/{id}', [DistribusiController::class, 'tolakTransaksi'])->name('manajer.deniedAction');
+        Route::get('distribusi/laporan', [DistribusiController::class, 'laporan'])->name('laporan.index');
+        Route::get('distribusi/laporan/cari', [DistribusiController::class, 'laporanAction'])->name('laporan.show');
     });
 
     Route::get('distribusi/jadwal', [DistribusiController::class, 'jadwalPengiriman'])->middleware('sopir')->name('sopir.index');

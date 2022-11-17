@@ -2,7 +2,9 @@
 
 @section('title', 'List Jadwal')
 
-@section('activeJadwal', 'active')
+@section('activeDistribusi', 'active')
+
+@section('jadwal', 'alert alert-success')
 
 @section('content')
 <div class="row">
@@ -39,6 +41,8 @@
                                     <th>#</th>
                                     <th>Kode</th>
                                     <th>Tanggal</th>
+                                    <th>Tujuan</th>
+                                    <th>Qty</th>
                                     <th>Status</th>
                                     <th>Surat Jalan</th>
                                 </tr>
@@ -48,7 +52,9 @@
                                     @forelse ($distribusi as $data )
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->kode_trx }}</td>
-                                    <td>{{ $data->created_at->format('d M Y') }}</td>
+                                    <td>{{ Carbon\Carbon::parse($data->tanggal)->format('d M Y') }}</td>
+                                    <td>{{ $data->item->count()}}</td>
+                                    <td>{{ $data->item->sum('qty')}}</td>
                                     <td>
                                         <span class="label label-success">{{ $data->status}} </span>
                                     </td>

@@ -15,6 +15,9 @@
           <div class="title">Dashboard</div>
         </a>
       </li>
+
+
+      @if (Auth::user()->role == 'Admin')
       <li class="@yield('activeBarang')">
         <a href="{{ route('barang.index') }}">
           <div class="icon">
@@ -23,6 +26,9 @@
           <div class="title">Barang Masuk</div>
         </a>
       </li>
+      @endif
+
+      @if (Auth::user()->role == 'Admin')
       <li class="dropdown @yield('activeMaster')">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <div class="icon">
@@ -37,6 +43,8 @@
           </ul>
         </div>
       </li>
+      @endif
+
       <li class="dropdown @yield('activeDistribusi')">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <div class="icon">
@@ -46,10 +54,20 @@
         </a>
         <div class="dropdown-menu">
           <ul>
+
+            @if (Auth::user()->role == 'Admin')
             <li><a href="{{ route('distribusi.index')}}" class="@yield('draftPengiriman')">Draft Pengiriman</a></li>
+            @endif
+
+            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Manajer')
             <li><a href="{{ route('manajer.index')}}" class="@yield('pengajuan')">Pengajuan diajukan</a></li>
-            <li><a href="{{ route('manajer.index')}}" class="@yield('jadwal')">Jadwal Pengiriman</a></li>
-            <li><a href="{{ route('distribusi.index')}}" class="@yield('laporan')">Laporan</a></li>
+            <li><a href="{{ route('laporan.index')}}" class="@yield('laporan')">Laporan</a></li>
+            @endif
+
+            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Sopir')
+            <li><a href="{{ route('sopir.index')}}" class="@yield('jadwal')">Jadwal Pengiriman</a></li>
+            @endif
+
           </ul>
         </div>
       </li>

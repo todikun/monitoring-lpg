@@ -10,4 +10,9 @@ class LpgDistribusi extends Model
     use HasFactory;
 
     protected $fillable = ['kode_trx', 'tanggal', 'status', 'keterangan'];
+
+    public function item()
+    {
+        return $this->hasMany(ItemDistribusi::class, 'distribusi_id', 'id');
+    }
 }

@@ -5,21 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Surat Jalan | Monitoring LPG</title>
+    <title>Laporan | Monitoring LPG</title>
 
     <link rel="stylesheet" href="{{ asset('dist/assets/css/bootstrap.min.css') }}">
 </head>
 
 <body>
 
-
     <div class="container">
         <div class="row pt-5">
             <div class="col">
                 <h2>Distribusi LPG</h2>
-                <p>Kode Transaksi : &nbsp; <strong>{{$distribusi->kode_trx}}</strong></p>
-
-                <p>Tanggal : &nbsp; <strong>{{ Carbon\Carbon::parse($distribusi->tanggal)->format('d F Y') }}</strong>
+                <p>Laporan Bulanan Periode : &nbsp; <strong>{{ Carbon\Carbon::parse($periode)->format('M Y')
+                        }}</strong>
                 </p>
                 <div class="card-body">
                     <div class="pt-5 mx-auto">
@@ -28,20 +26,22 @@
                                 <thead>
                                     <tr>
                                         <th width="5%">No.</th>
-                                        <th width=15%>Pangkalan</th>
+                                        <th width=15%>Kode Transaksi</th>
+                                        <th width="10%">Tujuan</th>
                                         <th width="5%">Qty</th>
-                                        <th width="15%">Paraf</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($items as $item)
+                                    @forelse ($distribusi as $data)
                                     <tr>
                                         <th>{{ $loop->iteration }}</th>
-                                        <td>{{ $item->pangkalan->nama }}</td>
-                                        <td>{{ $item->qty }}</td>
-                                        <td></td>
+                                        <td>{{ $data->kode_trx }}</td>
+                                        <td>{{ $data->item->count() }}</td>
+                                        <td>{{ $data->item->sum('qty') }}</td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <td colspan="4" class="text-center">No record</td>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -50,6 +50,7 @@
             </div>
         </div>
     </div>
+
 
     <script>
         window.print()
