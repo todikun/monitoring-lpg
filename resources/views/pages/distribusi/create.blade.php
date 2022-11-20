@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Tambah Item Keluar')
+@section('title', 'Tambah Draft Pengiriman')
 
 @section('activeDistribusi', 'active')
 
@@ -16,6 +16,10 @@
 
                             <label for="jumlah">Jumlah</label>
                             <input type="number" class="form-control" name="jumlah" id="jumlah" required>
+                            @if($errors->has('jumlah'))
+                            <p class="text-danger mb-3"><strong>{{ $errors->first('jumlah') }}</strong></p>
+                            @endif
+
                             <div class="form-footer">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-xs btn-primary">Submit</button>

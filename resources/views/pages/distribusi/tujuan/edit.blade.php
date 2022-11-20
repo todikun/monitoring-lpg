@@ -24,8 +24,11 @@
                                 @endforeach
                             </select>
 
-                            <label for="stok">Qty</label>
+                            <label for="qty">Qty</label>
                             <input type="number" class="form-control" name="qty" id="qty">
+                            @if($errors->has('qty'))
+                            <p class="text-danger mb-3"><strong>{{ $errors->first('qty') }}</strong></p>
+                            @endif
 
                             <div class="form-footer">
                                 <div class="form-group">

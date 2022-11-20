@@ -6,7 +6,8 @@ use App\Http\Controllers\{
     DashboardController,
     PangkalanController,
     BarangMasukController,
-    DistribusiController
+    DistribusiController,
+    UserController
 };
 
 /*
@@ -41,8 +42,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::middleware('admin')->group(function () {
         // admin
-        //pangkalan
         Route::resource('pangkalan', PangkalanController::class);
+        Route::get('user', [UserController::class, 'index'])->name('user.index');
+        Route::get('user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+        Route::patch('user/update/{id}', [UserController::class, 'update'])->name('user.update');
+        Route::delete('user/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
         //barang
         Route::get('barang', [BarangMasukController::class, 'index'])->name('barang.index');

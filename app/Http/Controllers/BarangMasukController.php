@@ -23,11 +23,9 @@ class BarangMasukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jumlah' => 'required',
-            'tanggal' => 'required'
+            'jumlah' => 'required|numeric',
+            'tanggal' => 'required|date'
         ]);
-
-        // dd($request);
 
         LpgMasuk::create([
             'jumlah' => $request->jumlah,
@@ -47,7 +45,8 @@ class BarangMasukController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'jumlah' => 'required'
+            'jumlah' => 'required|numeric',
+            'tanggal' => 'required|date'
         ]);
 
         LpgMasuk::find($id)->update([

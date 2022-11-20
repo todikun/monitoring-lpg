@@ -39,7 +39,7 @@
         <div class="dropdown-menu">
           <ul>
             <li><a href="{{ route('pangkalan.index') }}" class="@yield('pangkalan')">Pangkalan</a></li>
-            <li><a href="./uikits/components.html" class="@yield('user')">User</a></li>
+            <li><a href="{{ route('user.index') }}" class="@yield('user')">User</a></li>
           </ul>
         </div>
       </li>

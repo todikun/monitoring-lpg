@@ -57,7 +57,7 @@ class DistribusiController extends Controller
     public function storeTujuan(Request $request)
     {
         $request->validate([
-            'qty' => 'required'
+            'qty' => 'required|numeric'
         ]);
 
         // validasi stok
@@ -178,9 +178,9 @@ class DistribusiController extends Controller
     {
         $distribusi = LpgDistribusi::where('status', 'Disetujui')
             ->whereMonth('tanggal', '=', Carbon::parse($request->tanggal)->format('m'))
-            ->whereYear('tanggal', '=', Carbon::parse($request->tanggal)->format('Y'))->get()->count();
+            ->whereYear('tanggal', '=', Carbon::parse($request->tanggal)->format('Y'))->get();
 
-        if ($distribusi < 1) {
+        if ($distribusi->count() < 1) {
             return back()->with('status', 'Data periode ' . Carbon::parse($request->tanggal)->format('F Y') . ' belum ada!');
         }
 

@@ -28,15 +28,18 @@
                             <input type="hidden" name="distribusi_id" value="{{ $distribusi->id }}">
 
                             <label for="jumlah">Pangkalan</label>
-                            <select name="pangkalan_id" class="select2" tabindex="-1" aria-hidden="true">
+                            <select name="pangkalan_id" class="select2" tabindex="-1" aria-hidden="true" required>
                                 <option value="">-PILIH-</option>
                                 @foreach ($pangkalan as $data )
                                 <option value="{{$data->id}}">{{$data->nama}}</option>
                                 @endforeach
                             </select>
 
-                            <label for="stok">Qty</label>
+                            <label for="qty">Qty</label>
                             <input type="number" class="form-control" name="qty" id="qty">
+                            @if($errors->has('qty'))
+                            <p class="text-danger mb-3"><strong>{{ $errors->first('qty') }}</strong></p>
+                            @endif
 
                             <div class="form-footer">
                                 <div class="form-group">

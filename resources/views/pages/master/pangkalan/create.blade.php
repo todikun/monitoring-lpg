@@ -24,11 +24,23 @@
                             @csrf
 
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" name="nama" id="nama" required>
+                            <input type="text" class="form-control" name="nama" required>
+                            @if($errors->has('nama'))
+                            <p class="text-danger mb-3"><strong>{{ $errors->first('nama') }}</strong></p>
+                            @endif
+
                             <label for="nohp">No.Hp</label>
-                            <input type="text" class="form-control" name="nohp" id="nohp" required>
+                            <input type="text" class="form-control" name="nohp" required>
+                            @if($errors->has('nohp'))
+                            <p class="text-danger mb-3"><strong>{{ $errors->first('nohp') }}</strong></p>
+                            @endif
+
                             <label for="alamat">Alamat</label>
-                            <textarea name="alamat" rows="3" class="form-control" name="alamat" id="alamat"></textarea>
+                            <textarea name="alamat" rows="3" class="form-control" name="alamat"></textarea>
+                            @if($errors->has('alamat'))
+                            <p class="text-danger mb-3"><strong>{{ $errors->first('alamat') }}</strong></p>
+                            @endif
+
                             <div class="form-footer">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-xs btn-primary">Submit</button>
