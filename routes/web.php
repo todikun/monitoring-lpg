@@ -21,15 +21,9 @@ use App\Http\Controllers\{
 |
 */
 
-Route::get('/', function () {
-    return redirect('dashboard');
+Route::get('/', function(){
+	return redirect('dashboard');
 });
-
-Route::get('laporan', function () {
-    return view('pages.distribusi.manajer.laporan');
-});
-
-
 Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('login', [LoginController::class, 'actionLogin'])->name('login.action');
 
